@@ -87,7 +87,7 @@ public class user_DashboardActivity extends AppCompatActivity {
                     uploadNote.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(user_DashboardActivity.this, user_CategoryAdd.class));
+                            startActivity(new Intent(user_DashboardActivity.this, user_uploadNotes.class));
                             uploadDialog.dismiss(); // Dismiss the dialog after starting the new activity
                         }
                     });

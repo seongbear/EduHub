@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user_uploadNotes"
+    android:orientation="vertical"
+    android:background="@color/white_grey">
+
+    <LinearLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/shape_toolbar01"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="48dp"
+            android:layout_height="56dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_keyboard_backspace_24"
+            android:contentDescription="backButton" />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="Share Study Materials"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fill in the details"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/notesNameEt"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_2"
+            android:hint="Notes Name"
+            android:textColorHint="@color/dark_grey"
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            android:drawableLeft="@drawable/baseline_mode_edit_outline_24"
+            android:drawablePadding="10dp"
+            android:padding="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/chooseCategoryBtn"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@android:drawable/ic_media_play"
+            android:drawablePadding="10dp"
+            android:text="Category"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_grey"
+            android:textSize="23dp"
+            android:textAlignment="textStart"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/descriptionEt"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:inputType="textMultiLine"
+            android:hint="Description"
+            android:textColorHint="@color/dark_grey"
+            android:padding="10dp"
+            android:textAlignment="textStart"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textStyle="normal"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="end"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Notes Attachment"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/uploadDocument"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_34186"
+                android:background="@android:color/transparent"
+                android:contentDescription="Upload Document"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:id="@+id/uploadNotesBtn"
+            android:background="@drawable/shape_button01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
