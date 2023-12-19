@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <!--Set the background color of the rectangle-->
+            <solid android:color="#C5C3C3"/>
+        </shape>
+    </item>
+
+    <item android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <!-- Set the color and width of the bottom line -->
+            <solid android:color="#FFFFFF" />
+            <size android:height="10dp" />
+        </shape>
+    </item>
+
+</layer-list>
