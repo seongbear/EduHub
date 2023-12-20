@@ -3,9 +3,11 @@ package com.example.eduhub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -25,17 +27,29 @@ import java.util.ArrayList;
 public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCategory.HolderCategory> implements Filterable {
     public Context context;
     public ArrayList<user_ModelCategory> categoryArrayList,filterList;
+    private OnItemClickListener listener;
 
     //view binding
     private RowCategoriesBinding binding;
 
     //instance of our filter class
     private user_filterCategory filter;
+    //declare a variable to store the selected position
+    private int selectedCategoryPosition = RecyclerView.NO_POSITION;
+
 
     public user_AdapterCategory (Context context, ArrayList<user_ModelCategory> categoryArrayList){
         this.context = context;
         this.categoryArrayList = categoryArrayList;
         this.filterList = categoryArrayList;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(user_ModelCategory category);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
     @NonNull
@@ -57,6 +71,54 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
 
         //set data
         holder.categoryTv.setText(category);
+
+        //handle choose Category
+        holder.categoryTv.setOnClickListener(new View.OnClickListener() {
+            private static final long DOUBLE_CLICK_TIME_DELTA = 300; // Maximum time between clicks for a double-click
+            private long lastClickTime = 0;
+
+            @Override
+            public void onClick(View v) {
+                long clickTime = System.currentTimeMillis();
+
+                // Check if the category is already selected
+                if (selectedCategoryPosition == holder.getAdapterPosition()) {
+                    // Check for a double-click
+                    if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                        // Treat it as a double-click, unselect the item
+                        selectedCategoryPosition = RecyclerView.NO_POSITION;
+                        holder.categoryTv.setBackgroundColor(0xFFE1E1E1); // Set the default color
+                        holder.categoryTv.setTextColor(0xFF000000); // Set the default text color
+
+                        // Pass the category name to another class
+                        String categoryName = categoryArrayList.get(holder.getAdapterPosition()).getCategory();
+                        passCategoryNameToOtherClass(categoryName);
+                    }
+                } else {
+                    // A new category is selected, update the selection
+                    int previousSelected = selectedCategoryPosition;
+                    selectedCategoryPosition = holder.getAdapterPosition();
+
+                    // Reset the previously selected item
+                    if (previousSelected != RecyclerView.NO_POSITION) {
+                        // Reset the color of the previously selected item
+                        notifyItemChanged(previousSelected);
+                    }
+
+                    // Update the UI for the newly selected item
+                    holder.categoryTv.setBackgroundColor(0xFF686BFF); // Set the selected color
+                    holder.categoryTv.setTextColor(0xFFFFFFFF); // Set the selected text color
+
+                    // Pass the category name to another class
+                    String categoryName = categoryArrayList.get(holder.getAdapterPosition()).getCategory();
+                    passCategoryNameToOtherClass(categoryName);
+                    Toast.makeText(v.getContext(),"Notes category chosen",Toast.LENGTH_SHORT).show();
+                }
+                lastClickTime = clickTime;
+            }
+        });
+
+
 
         //handle click, delete category
 //        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +144,13 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
 //                        .show();
 //            }
 //        });
+    }
+
+    private void passCategoryNameToOtherClass(String categoryName) {
+        //You can use Intent to pass data to another class/activity
+        Intent intent = new Intent(context,user_uploadNotes.class);
+        intent.putExtra("CATEGORY_NAME",categoryName);
+        context.startActivity(intent);
     }
 
     //For Admin Usage: Delete Category

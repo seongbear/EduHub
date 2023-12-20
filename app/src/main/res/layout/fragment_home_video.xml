@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="150dp"
+        android:layout_height="180dp" />
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/numberOfViews"
+        android:text="Video Title that is longer than the width"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/numberOfViews"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_alignBottom="@+id/videoView">
+        <TextView
+            android:id="@+id/numberOfViewTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20k"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Views"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

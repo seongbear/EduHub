@@ -4,7 +4,9 @@ public class user_ModelCategory {
     //make sure to user same spellings for model variables in firebase
 
     String id, category, uid;
+    int color;
     long timestamp;
+    boolean isSelected;
 
     //constructor empty required for firebase
     public user_ModelCategory(){
@@ -49,5 +51,21 @@ public class user_ModelCategory {
 
     public void setTimestamp(long timestamp){
         this.timestamp = timestamp;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color){
+        this.color = color;
+    }
+
+    public boolean isSelected(){
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected){
+        isSelected = selected;
     }
 }

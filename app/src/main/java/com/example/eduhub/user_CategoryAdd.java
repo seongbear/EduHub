@@ -2,7 +2,10 @@ package com.example.eduhub;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -56,6 +59,7 @@ public class user_CategoryAdd extends AppCompatActivity {
     TextInputEditText categoryNameEt;
     EditText searchCategoryEt;
     String category;
+    CardView categoryBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +99,6 @@ public class user_CategoryAdd extends AppCompatActivity {
 
             }
         });
-        //edit text change listener, search
-
 
         //pop up dialog handle
         progressDialog = new ProgressDialog(this);
@@ -107,9 +109,7 @@ public class user_CategoryAdd extends AppCompatActivity {
         closeBtn = addNewCategoryDialog.findViewById(R.id.closeBtn);
         addBtn = addNewCategoryDialog.findViewById(R.id.addBtn);
         //uploadCategoryImageBtn = addNewCategoryDialog.findViewById(R.id.addImageBtn);
-
         addNewCategoryDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         //handle click, start category add screen
         binding.addCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +151,17 @@ public class user_CategoryAdd extends AppCompatActivity {
                 onBackButtonClicked();
             }
         });
+
+        //Choose the category
+//        categoryBtn = findViewById(R.id.categoryTv);
+//        categoryBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(user_CategoryAdd.this, user_uploadNotes.class));
+//            }
+//        });
     }
+
 
     private void loadCategories() {
         // Initialize ArrayList
