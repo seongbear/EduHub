@@ -1,13 +1,12 @@
 package com.example.eduhub;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -17,10 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eduhub.databinding.RowCategoriesBinding;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -36,13 +33,26 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
     private user_filterCategory filter;
     //declare a variable to store the selected position
     private int selectedCategoryPosition = RecyclerView.NO_POSITION;
+    String title,description;
+    Uri pdfUri;
 
 
     public user_AdapterCategory (Context context, ArrayList<user_ModelCategory> categoryArrayList){
         this.context = context;
         this.categoryArrayList = categoryArrayList;
         this.filterList = categoryArrayList;
+
+        //Register your class with EventBus
+        //EventBus.getDefault().register(this);
     }
+
+//    public void onNoteDataEvent(user_noteDataEvent event){
+//        title = event.getTitle();
+//        description = event.getDescription();
+//        pdfUri = event.getPdfUri();
+//
+//        Log.d("user_AdapterCategory", "Pass Data: "+title+","+description+","+pdfUri);
+//    }
 
     public interface OnItemClickListener{
         void onItemClick(user_ModelCategory category);
@@ -90,9 +100,10 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
                         holder.categoryTv.setBackgroundColor(0xFFE1E1E1); // Set the default color
                         holder.categoryTv.setTextColor(0xFF000000); // Set the default text color
 
-                        // Pass the category name to another class
+                        // Pass the category id and category name to another class
+                        String categoryId = categoryArrayList.get(holder.getAdapterPosition()).getId();
                         String categoryName = categoryArrayList.get(holder.getAdapterPosition()).getCategory();
-                        passCategoryNameToOtherClass(categoryName);
+                        passCategoryNameToOtherClass(categoryName,categoryId);
                     }
                 } else {
                     // A new category is selected, update the selection
@@ -109,16 +120,15 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
                     holder.categoryTv.setBackgroundColor(0xFF686BFF); // Set the selected color
                     holder.categoryTv.setTextColor(0xFFFFFFFF); // Set the selected text color
 
-                    // Pass the category name to another class
+                    // Pass the category id and category name to another class
+                    String categoryId = categoryArrayList.get(holder.getAdapterPosition()).getId();
                     String categoryName = categoryArrayList.get(holder.getAdapterPosition()).getCategory();
-                    passCategoryNameToOtherClass(categoryName);
+                    passCategoryNameToOtherClass(categoryName, categoryId);
                     Toast.makeText(v.getContext(),"Notes category chosen",Toast.LENGTH_SHORT).show();
                 }
                 lastClickTime = clickTime;
             }
         });
-
-
 
         //handle click, delete category
 //        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -146,10 +156,14 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
 //        });
     }
 
-    private void passCategoryNameToOtherClass(String categoryName) {
+    private void passCategoryNameToOtherClass(String categoryName, String categoryId) {
         //You can use Intent to pass data to another class/activity
         Intent intent = new Intent(context,user_uploadNotes.class);
+//        intent.putExtra("NOTE_TITLE",title);
+//        intent.putExtra("NOTE_DESCRIPTION",description);
+//        intent.putExtra("PDF_URL",pdfUri);
         intent.putExtra("CATEGORY_NAME",categoryName);
+        intent.putExtra("CATEGORY_ID",categoryId);
         context.startActivity(intent);
     }
 

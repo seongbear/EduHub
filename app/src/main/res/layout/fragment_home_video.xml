@@ -14,6 +14,7 @@
         android:id="@+id/videoTitle"
         android:layout_width="150dp"
         android:layout_height="30dp"
+        android:paddingLeft="5dp"
         android:layout_above="@+id/numberOfViews"
         android:text="Video Title that is longer than the width"
         android:textColor="@color/white"
@@ -27,6 +28,7 @@
         android:orientation="horizontal"
         android:layout_alignBottom="@+id/videoView">
         <TextView
+            android:paddingLeft="5dp"
             android:id="@+id/numberOfViewTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -182,31 +182,56 @@
         android:background="@color/white_grey"/>
 
     <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <!-- Left side: ImageView and TextView -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/note"
-            android:layout_marginRight="8dp"
-            android:layout_gravity="center"/>
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notes"
-            android:textSize="25dp"
-            android:textStyle="bold"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/note"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"/>
+        </LinearLayout>
+
+        <!-- Right side: AutoCompleteTextView (Dropdown) -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_gravity="center"
-            android:fontFamily="sans-serif-condensed-medium"/>
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:minHeight="48dp"
+            android:layout_weight="1"
+            android:hint="Select"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-        <!--DropDown-->
+            <AutoCompleteTextView
+                android:id="@+id/filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -218,7 +243,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/row_notes">
 
         </androidx.recyclerview.widget.RecyclerView>
 

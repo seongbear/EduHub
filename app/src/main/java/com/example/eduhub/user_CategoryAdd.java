@@ -3,14 +3,13 @@ package com.example.eduhub;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -34,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,11 +56,13 @@ public class user_CategoryAdd extends AppCompatActivity {
     Dialog addNewCategoryDialog;
     ImageButton closeBtn;
     Button addBtn;
-    //ImageButton uploadCategoryImageBtn;
     TextInputEditText categoryNameEt;
     EditText searchCategoryEt;
     String category;
     CardView categoryBtn;
+
+    String title, description;
+    Uri pdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,19 @@ public class user_CategoryAdd extends AppCompatActivity {
         checkUser();
         loadCategories();
 
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            title = intent.getStringExtra("TITLE");
+//            description = intent.getStringExtra("DESCRIPTION");
+//            pdf = intent.getParcelableExtra("PDF");
+//
+//            Log.d("user_CategoryAdd", "Received Title: " + title);
+//            Log.d("user_CategoryAdd", "Received Description: " + description);
+//            Log.d("user_CategoryAdd", "Received PDF Uri: " + pdf);
+//
+//            sendData(title,description,pdf);
+//        }
+
         //edit text change listener, search
         searchCategoryEt = findViewById(R.id.searchCategoryEt);
         searchCategoryEt.addTextChangedListener(new TextWatcher() {
@@ -84,12 +100,10 @@ public class user_CategoryAdd extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //called as and when the user type each letter
-                try{
-                    // Assuming you have an instance of user_AdapterCategory named userCategoryAdapter
+                try {
+                    // Assuming you have an instance of user_AdapterCategory named adapterCategory
                     adapterCategory.getFilter().filter(s);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -108,7 +122,6 @@ public class user_CategoryAdd extends AppCompatActivity {
         //Find views from addNewCategoryDialog
         closeBtn = addNewCategoryDialog.findViewById(R.id.closeBtn);
         addBtn = addNewCategoryDialog.findViewById(R.id.addBtn);
-        //uploadCategoryImageBtn = addNewCategoryDialog.findViewById(R.id.addImageBtn);
         addNewCategoryDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //handle click, start category add screen
         binding.addCategoryBtn.setOnClickListener(new View.OnClickListener() {
@@ -151,17 +164,11 @@ public class user_CategoryAdd extends AppCompatActivity {
                 onBackButtonClicked();
             }
         });
-
-        //Choose the category
-//        categoryBtn = findViewById(R.id.categoryTv);
-//        categoryBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(user_CategoryAdd.this, user_uploadNotes.class));
-//            }
-//        });
     }
 
+    public void sendData(String title, String description, Uri pdf) {
+        //EventBus.getDefault().post(new user_noteDataEvent(title,description,pdf));
+    }
 
     private void loadCategories() {
         // Initialize ArrayList
@@ -217,8 +224,8 @@ public class user_CategoryAdd extends AppCompatActivity {
 
         // Setup info to add in Firebase DB
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("id", ""+timestamp);
-        hashMap.put("category", ""+category);
+        hashMap.put("id", "" + timestamp);
+        hashMap.put("category", "" + category);
         hashMap.put("timestamp", timestamp);
         hashMap.put("uid", "" + firebaseAuth.getUid());
 
@@ -246,11 +253,10 @@ public class user_CategoryAdd extends AppCompatActivity {
                 });
     }
 
-
     private void onBackButtonClicked() {
         //Implement the desired action when the back button is clicked
         //startActivity(new Intent(CategoryAdd.this,HomeFragment.class));
-        super.onBackPressed();
+        onBackPressed();
         finish();
     }
 

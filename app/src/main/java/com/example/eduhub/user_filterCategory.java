@@ -53,4 +53,3 @@ public class user_filterCategory extends Filter {
         adapterCategory.notifyDataSetChanged();
     }
 }
-
