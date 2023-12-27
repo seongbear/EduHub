@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/noteCard"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/rectangle_2"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:contentPadding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/profileImg"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <!--ImageView: Profile of user of comment -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_person_2_24"
+                    app:shapeAppearanceOverlay="@style/styleCircleImage"
+                    app:strokeColor="@color/dark_grey"
+                    app:strokeWidth="1dp">
+                </com.google.android.material.imageview.ShapeableImageView>
+
+            </RelativeLayout>
+
+            <!--TextView: Name of user of comment -->
+            <TextView
+                android:id="@+id/nameOfUserComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/profileImg"
+                android:text="Person Name"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/dateOfUserComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="dd/MM/yyyy"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/dark_grey"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/commentOfUserComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameOfUserComment"
+                android:layout_marginStart="10dp"
+                android:textSize="15dp"
+                android:textStyle="normal"
+                android:textColor="#838282"
+                android:layout_toEndOf="@id/profileImg"
+                android:text="I love this note sooo much" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/commentOfUserComment"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp">
+
+                <ImageButton
+                    android:id="@+id/reportCommentBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/reportcomment" />
+
+                <ImageButton
+                    android:id="@+id/upvoteBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/arrow_trend_up" />
+
+                <TextView
+                    android:id="@+id/numberOfUpvotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="21"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

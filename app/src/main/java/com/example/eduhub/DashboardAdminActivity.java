@@ -3,17 +3,11 @@ package com.example.eduhub;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.eduhub.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.eduhub.databinding.ActivityDashboardAdminBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +46,7 @@ public class DashboardAdminActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null){
             //not logged in, go to main screen
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         } else{
             //logged in, get user info

@@ -19,6 +19,7 @@
         android:gravity="center">
 
         <ImageButton
+            android:id="@+id/allCategoryChoiceBtn"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -33,28 +34,24 @@
             android:background="@color/dark_grey"
             android:layout_marginRight="10dp"/>
 
-            <HorizontalScrollView
+        <!-- HorizontalScrollView -->
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/CategoryRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/fragment_home_categories">
+            </androidx.recyclerview.widget.RecyclerView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/horizontalRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/fragment_home_categories">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
+        </HorizontalScrollView>
     </LinearLayout>
 
     <LinearLayout
@@ -192,7 +189,7 @@
         <!-- Left side: ImageView and TextView -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_gravity="center">
@@ -216,9 +213,10 @@
 
         <!-- Right side: AutoCompleteTextView (Dropdown) -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/selectionTv"
             android:layout_gravity="center"
             android:layout_width="20dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:layout_weight="1"
             android:hint="Select"
@@ -227,27 +225,33 @@
             <AutoCompleteTextView
                 android:id="@+id/filter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"/>
+                android:layout_height="48dp"
+                android:inputType="none" />
+
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/row_notes">
+            android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notesRv"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/row_notes"/>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

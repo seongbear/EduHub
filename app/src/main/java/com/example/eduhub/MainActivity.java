@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
+import com.example.eduhub.LoginActivity;
+import com.example.eduhub.RegisterActivity;
 import com.example.eduhub.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

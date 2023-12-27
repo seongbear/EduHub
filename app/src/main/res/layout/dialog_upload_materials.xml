@@ -11,32 +11,18 @@
     android:orientation="vertical">
 
     <!--Upload Notes-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/attach"
-            android:background="@android:color/transparent"
-            android:layout_margin="10dp"
-            android:contentDescription="Upload Note" />
-
         <Button
             android:id="@+id/uploadNotesBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="Upload Notes"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textSize="20sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:gravity="center"
+            android:drawableLeft="@drawable/attach"/>
 
     <!-- Spacer with Line -->
     <View
@@ -45,31 +31,17 @@
         android:background="@android:color/darker_gray" />
 
     <!--Upload Video-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/video_player"
-            android:background="@android:color/transparent"
-            android:layout_margin="10dp"
-            android:contentDescription="Upload Video" />
-
         <Button
             android:id="@+id/uploadVideoBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Upload Video"
             android:background="@android:color/transparent"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textSize="20sp"
-            android:gravity="center" />
-    </LinearLayout>
+            android:gravity="center"
+            android:drawableLeft="@drawable/video_player"/>
 
 </LinearLayout>

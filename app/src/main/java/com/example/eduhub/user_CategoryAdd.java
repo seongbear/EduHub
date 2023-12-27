@@ -21,7 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.eduhub.MainActivity;
+import com.example.eduhub.user_AdapterCategory;
 import com.example.eduhub.databinding.ActivityCategoryAddBinding;
+import com.example.eduhub.user_ModelCategory;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,8 +35,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -164,10 +165,6 @@ public class user_CategoryAdd extends AppCompatActivity {
                 onBackButtonClicked();
             }
         });
-    }
-
-    public void sendData(String title, String description, Uri pdf) {
-        //EventBus.getDefault().post(new user_noteDataEvent(title,description,pdf));
     }
 
     private void loadCategories() {

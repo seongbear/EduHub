@@ -3,7 +3,6 @@ package com.example.eduhub;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eduhub.databinding.RowCategoriesBinding;
-
-import org.greenrobot.eventbus.EventBus;
+import com.example.eduhub.user_ModelCategory;
+import com.example.eduhub.user_filterCategory;
+import com.example.eduhub.user_uploadNotes;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,6 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
         this.context = context;
         this.categoryArrayList = categoryArrayList;
         this.filterList = categoryArrayList;
-
         //Register your class with EventBus
         //EventBus.getDefault().register(this);
     }
@@ -158,7 +157,7 @@ public class user_AdapterCategory extends RecyclerView.Adapter<user_AdapterCateg
 
     private void passCategoryNameToOtherClass(String categoryName, String categoryId) {
         //You can use Intent to pass data to another class/activity
-        Intent intent = new Intent(context,user_uploadNotes.class);
+        Intent intent = new Intent(context, user_uploadNotes.class);
 //        intent.putExtra("NOTE_TITLE",title);
 //        intent.putExtra("NOTE_DESCRIPTION",description);
 //        intent.putExtra("PDF_URL",pdfUri);

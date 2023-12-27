@@ -1,6 +1,7 @@
 package com.example.eduhub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.eduhub.MainActivity;
 import com.example.eduhub.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -31,17 +33,18 @@ public class user_DashboardActivity extends AppCompatActivity {
     user_shortsFragment shortsFragment = new user_shortsFragment();
     user_calendarFragment calendarFragment = new user_calendarFragment();
     user_profileFragment profileFragment = new user_profileFragment();
+    Toolbar toolbar;
 
     //Upload Materials
-    Dialog uploadDialog;
-    Button uploadNote;
-    Button uploadVideo;
+    Dialog uploadDialog, settingDialog;
+    Button uploadNote,uploadVideo;
+    Button settingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_dashboard);
+        setContentView(binding.getRoot());
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -56,14 +59,29 @@ public class user_DashboardActivity extends AppCompatActivity {
         uploadVideo = uploadDialog.findViewById(R.id.uploadVideoBtn);
         uploadDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        //Toolbar
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                showPopupMenu(v);
-//            }
-//        });
+        //Setting dialog
+        settingDialog = new Dialog(this);
+        settingDialog.setContentView(R.layout.dialog_settings);
+        settingBtn = binding.toolbar.findViewById(R.id.setting);
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingDialog.setContentView(R.layout.dialog_settings);
+                settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                Button privacy = settingDialog.findViewById(R.id.privacyBtn);
+                Button editProfile = settingDialog.findViewById(R.id.editProfileBtn);
+                Button logOut = settingDialog.findViewById(R.id.logoutBtn);
+
+                logOut.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        firebaseAuth.signOut();
+                        checkUser();
+                    }
+                });
+            }
+        });
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
@@ -151,7 +169,7 @@ public class user_DashboardActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null){
             //not logged in, go to main screen
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         } else{
             //logged in, get user info

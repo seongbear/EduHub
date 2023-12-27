@@ -8,14 +8,12 @@
     android:layout_margin="5dp">
 
     <Button
-        android:layout_marginLeft="5dp"
+        android:id="@+id/categoryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
         android:textSize="13sp"
         android:background="@android:color/transparent"
         android:textColor="#686BFF"/>
-
-
 
 </androidx.cardview.widget.CardView>

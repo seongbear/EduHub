@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FFFFFF"
-    tools:context=".SplashActivity">
+    tools:context=".LogInSignUp.SplashActivity">
 
     <ImageView
         android:layout_width="400dp"

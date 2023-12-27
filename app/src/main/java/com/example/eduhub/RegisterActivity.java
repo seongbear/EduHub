@@ -12,7 +12,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.eduhub.MainActivity;
+import com.example.eduhub.R;
 import com.example.eduhub.databinding.ActivityRegisterBinding;
+import com.example.eduhub.user_DashboardActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -75,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void onBackButtonClicked() {
         //Implement the desired action when the back button is clicked
-        startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
         finish();
     }
 

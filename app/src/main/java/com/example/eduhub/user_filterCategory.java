@@ -1,9 +1,12 @@
 package com.example.eduhub;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import android.widget.Filter;
+
+import com.example.eduhub.user_AdapterCategory;
+import com.example.eduhub.user_ModelCategory;
+
 public class user_filterCategory extends Filter {
     // ArrayList in which we want to search
     ArrayList<user_ModelCategory> filterList;

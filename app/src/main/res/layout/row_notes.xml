@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/noteCard"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="148dp"
+    android:layout_height="180dp"
     android:layout_margin="5dp"
-    android:background="@color/white"
+    android:background="@drawable/rectangle_2"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
     app:contentPadding="5dp">
@@ -14,24 +16,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_2">
+
         <RelativeLayout
             android:id="@+id/pdfRl"
             android:layout_width="100dp"
-            android:layout_height="140dp"
-            android:layout_margin="5dp"
+            android:layout_height="180dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@color/light_grey">
 
             <!--PDF View-->
             <com.github.barteksc.pdfviewer.PDFView
                 android:id="@+id/pdfView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <!--Progress Bar-->
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/progressBar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
 
         </RelativeLayout>
 
@@ -57,13 +63,103 @@
         <TextView
             android:id="@+id/descriptionTv"
             style="@style/TextAppearance.MaterialComponents.Body2"
-            android:layout_width="230dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Note Description"
             android:layout_toEndOf="@id/pdfRl"
             android:layout_below="@id/authorTv"
-            android:maxLines="3"/>
+            android:maxLines="4"/>
 
+        <TextView
+            android:id="@+id/sizeTv"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/pdfRl"
+            android:maxLines="1"
+            android:text="13 MB"
+            android:textColor="@color/dark_grey"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/dateTv"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dd/MM/yyyy"
+            android:layout_toEndOf="@+id/sizeTv"
+            android:layout_toStartOf="@+id/categoryTv"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            android:textSize="12dp"
+            android:textColor="@color/dark_grey"/>
+
+        <TextView
+            android:id="@+id/categoryTv"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentRight="true"
+            android:maxLines="1"
+            android:text="Category"
+            android:textColor="@color/dark_grey"
+            android:textSize="12dp"
+            android:layout_marginRight="5dp"/>
+
+        <ToggleButton
+            android:id="@+id/favouriteBtn"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/favourite_button"
+            android:onClick="onCustomToggleClick"
+            android:textOff=""
+            android:textOn="" />
+
+        <LinearLayout
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_above="@id/categoryTv"
+            android:layout_alignParentRight="true">
+
+            <ToggleButton
+                android:id="@+id/LikeBtn"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/like_button"
+                android:onClick="onCustomToggleClick"
+                android:textOff=""
+                android:textOn=""
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/numberOfLikes"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="21 likes"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:textStyle="normal"
+                android:textColor="@color/dark_grey" />
+        </LinearLayout>
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

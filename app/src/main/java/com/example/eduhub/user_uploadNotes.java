@@ -42,6 +42,7 @@ public class user_uploadNotes extends AppCompatActivity {
     TextView pdfName;
     EditText titleNote, descriptionNote;
     private String tilte = "", description = "", category = "", id="";
+    int likes=0;
     //Passed Data
     String tempTitle, tempDescription, tempPdf;
 
@@ -367,6 +368,7 @@ public class user_uploadNotes extends AppCompatActivity {
         hashMap.put("category_id",id);
         hashMap.put("url",""+uploadNoteUrl);
         hashMap.put("timestamp",timestamp);
+        hashMap.put("Likes",likes);
 
         //db reference: DB > Notes
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Notes");
