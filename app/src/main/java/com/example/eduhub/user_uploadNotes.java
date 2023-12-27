@@ -372,6 +372,10 @@ public class user_uploadNotes extends AppCompatActivity {
         hashMap.put("Views",views);
         hashMap.put("Download",download);
 
+        Intent intent1 = new Intent (user_uploadNotes.this, user_notesDetails.class);
+        intent1.putExtra("noteId", ""+timestamp);
+        startActivity(intent1);
+
         //db reference: DB > Notes
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Notes");
         ref.child(""+timestamp)

@@ -3,10 +3,15 @@ package com.example.eduhub;
 import static com.example.eduhub.Constants.MAX_BYTES_PDF;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +24,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
 public class user_notesDetails extends AppCompatActivity {
-    private String title, description, authorName, dateUploaded, categoryName, size, authorID, url;
+    private String title, description, authorName, dateUploaded, categoryName, size, authorID, url, noteId;
     private int views, downloads;
     private long timestamp;
     TextView noteTitle, noteDescription, noteCategory, noteDate, author,sizeTv, numberOfViews, numberOfDownloads;
     PDFView noteImg;
+    ImageButton backBtn;
+    Button readBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +46,7 @@ public class user_notesDetails extends AppCompatActivity {
         setContentView(R.layout.activity_user_notes_details);
 
         //Retrieve the noteID from the intent
-        String noteId = getIntent().getStringExtra("noteId");
+        noteId = getIntent().getStringExtra("noteId");
         loadNoteDetails(noteId);
         Toast.makeText(this, "noteID: "+noteId, Toast.LENGTH_SHORT).show();
 
@@ -50,11 +59,60 @@ public class user_notesDetails extends AppCompatActivity {
         noteImg = findViewById(R.id.pdfView);
         numberOfDownloads = findViewById(R.id.numberOfDownloads);
         numberOfViews = findViewById(R.id.numberOfViews);
+        backBtn = findViewById(R.id.backNotesBtn);
+        readBtn = findViewById(R.id.readBtn);
+
+        //handle click, go back
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(user_notesDetails.this, user_HomeFragment.class));
+            }
+        });
+
+        //handle click, open to view notes
+        readBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increment the number of views
+                DatabaseReference noteRef = FirebaseDatabase.getInstance().getReference().child("Notes").child(noteId);
+                noteRef.runTransaction(new Transaction.Handler() {
+                    @NonNull
+                    @Override
+                    public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                        // Retrieve current views
+                        Integer currentViews = mutableData.child("Views").getValue(Integer.class);
+                        if (currentViews == null) {
+                            currentViews = 0; // If the field is null, default to 0
+                        }
+
+                        // Increment views by 1
+                        mutableData.child("Views").setValue(currentViews + 1);
+
+                        // Set value back to the database
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
+                        // Handle completion
+                        if (committed && dataSnapshot != null) {
+                            // Views updated successfully
+                            Intent intent = new Intent(user_notesDetails.this, user_readNote.class);
+                            intent.putExtra("noteId", noteId);
+                            startActivity(intent);
+                        } else {
+                            // Views update failed
+                            Toast.makeText(user_notesDetails.this, "Failed to update views", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void loadNoteDetails(String noteId) {
-        Log.d("Note details", "Receiver noteId: "+noteId);
-
+        //Log.d("Note details", "Receiver noteId: "+noteId);
         DatabaseReference noteRef = FirebaseDatabase.getInstance().getReference().child("Notes").child(noteId);
         noteRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,7 +132,9 @@ public class user_notesDetails extends AppCompatActivity {
                     url = snapshot.child("url").getValue(String.class);
                     loadPdfSize(url);
                     loadPdfUrl(url);
-//                    //number of views and downloads
+
+                    //Increment the number of views
+                    //number of views and downloads
                     Integer views = snapshot.child("Views").getValue(Integer.class);
                     Integer downloads = snapshot.child("Download").getValue(Integer.class);
 
@@ -91,8 +151,6 @@ public class user_notesDetails extends AppCompatActivity {
                     noteDescription.setText(description);
                     noteCategory.setText(categoryName);
                     noteDate.setText(dateUploaded);
-//                    numberOfDownloads.setText(downloads);
-//                    numberOfViews.setText(views);
                 }else{
                     //Note with the given ID does not exist
                     Log.d("Note details", "Note with ID  "+noteId+" does not exist");
