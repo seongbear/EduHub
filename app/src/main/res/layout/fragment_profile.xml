@@ -12,13 +12,13 @@
                 android:elevation="10dp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/user_pic"
-                    android:contentDescription="profile picture" />
-            </LinearLayout>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/user_pic"
+                android:contentDescription="profile picture" />
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
