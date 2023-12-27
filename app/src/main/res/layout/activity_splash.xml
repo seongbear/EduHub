@@ -8,13 +8,14 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FFFFFF"
-    tools:context=".LogInSignUp.SplashActivity">
+    tools:context=".SplashActivity">
 
     <ImageView
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:src="@mipmap/ic_welcome"
-        android:scaleType="centerCrop"/>
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_welcome" />
 
     <ImageView
         android:layout_width="250dp"

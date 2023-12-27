@@ -176,7 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onFailure(Exception e) {
                         //data failed adding to db
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, String.format("%s", e.getMessage()), Toast.LENGTH_SHORT).show();
                     }
                 });
         }

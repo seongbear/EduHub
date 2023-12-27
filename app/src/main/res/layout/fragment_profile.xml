@@ -1,18 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_profileFragment"
-    android:background="#18AAEC">
+    android:background="@drawable/profile_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+        <LinearLayout
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/user_pic"
+                    android:contentDescription="profile picture" />
+            </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile Fragment"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"
-        android:textSize="25sp"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="28dp"
+        android:layout_marginBottom="-20dp"
+        >
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jennie Kim"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:text="jennieKim@gmail.com"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:baselineAligned="false">
+
+                <!-- First Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:id="@+id/accountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
+                        android:text="User"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <!-- Second Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Joined"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:id="@+id/joinedTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
+                        android:text="08/05/2021"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <!-- Third Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Posts"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:id="@+id/postsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
+                        android:text="3"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:dividerThickness="3dp"
+                android:layout_marginVertical="5dp"
+                app:dividerColor="@color/white_grey"/>
+
+            <LinearLayout
+                android:id="@+id/buttonLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="3"
+                android:layout_below="@id/textLinearLayout"
+                >
+
+                <Button
+                    android:id="@+id/btnFragmentNotes"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Notes"
+                    android:background="@drawable/button_category"
+                    android:layout_marginHorizontal="5dp"
+                    android:onClick="loadFragment1" />
+
+                <Button
+                    android:id="@+id/btnFragmentVideos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Videos"
+                    android:background="@drawable/button_category"
+                    android:layout_marginEnd="5dp"
+                    android:onClick="loadFragment2" />
+
+                <Button
+                    android:id="@+id/btnFragmentHistory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="History"
+                    android:background="@drawable/button_category"
+                    android:layout_marginEnd="5dp"
+                    android:onClick="loadFragment3" />
+
+            </LinearLayout>
+
+            <ScrollView android:id="@+id/ScrollView"
+                android:layout_width="match_parent"
+                android:contentDescription="content"
+                android:layout_height="300dp">
+                <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="300dp"
+                android:maxHeight="300dp"
+                />
+            </ScrollView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

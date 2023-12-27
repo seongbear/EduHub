@@ -41,6 +41,7 @@
             android:layout_toEndOf="@+id/backNotesBtn"/>
 
         <ImageButton
+            android:contentDescription="report"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/material_symbols_flag_outline"
@@ -408,6 +409,7 @@
                 android:textSize="20sp" />
 
             <ImageButton
+                android:contentDescription="download"
                 android:id="@+id/downloadBtn"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -415,7 +417,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_3"
-                android:src="@drawable/__icon__download_" />
+                android:src="@drawable/baseline_download_24" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -427,8 +429,8 @@
 
                 <ToggleButton
                     android:id="@+id/LikeBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="38dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:background="@drawable/like_button"
                     android:onClick="onCustomToggleClick"
@@ -470,6 +472,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10sp"
                 android:layout_weight="1"
+                android:contentDescription="share"
                 android:background="@android:color/transparent"
                 android:src="@drawable/share" />
         </LinearLayout>
