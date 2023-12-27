@@ -60,15 +60,24 @@
             android:text="Author Name"
             android:textColor="@color/dark_grey"/>
 
-        <TextView
-            android:id="@+id/descriptionTv"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            android:layout_width="210dp"
+        <RelativeLayout
+            android:id="@+id/descriptionTvRl"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Note Description"
-            android:layout_toEndOf="@id/pdfRl"
-            android:layout_below="@id/authorTv"
-            android:maxLines="4"/>
+            android:layout_below="@+id/authorTv"
+            android:layout_toEndOf="@+id/pdfRl"
+            android:layout_toRightOf="@+id/favouriteBtn">
+
+            <TextView
+                android:id="@+id/descriptionTv"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:maxLines="4"
+                android:text="Note Description"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/sizeTv"
@@ -116,6 +125,7 @@
             android:textColor="@color/dark_grey"
             android:textSize="12dp"
             android:layout_marginRight="5dp"/>
+
 
         <ToggleButton
             android:id="@+id/favouriteBtn"

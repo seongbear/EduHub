@@ -2,11 +2,16 @@ package com.example.eduhub;
 
 import static com.example.eduhub.Constants.MAX_BYTES_PDF;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,13 +37,16 @@ import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
 public class user_notesDetails extends AppCompatActivity {
+    private static final String TAG_DOWNLOAD = "DOWNLOAD_TAG";
+    private static final int SAF_REQUEST_CODE = 0;
     private String title, description, authorName, dateUploaded, categoryName, size, authorID, url, noteId;
     private int views, downloads;
     private long timestamp;
     TextView noteTitle, noteDescription, noteCategory, noteDate, author,sizeTv, numberOfViews, numberOfDownloads;
     PDFView noteImg;
-    ImageButton backBtn;
+    ImageButton backBtn, downloadBtn;
     Button readBtn;
+    ActivityResultLauncher<String> requestPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class user_notesDetails extends AppCompatActivity {
         //Retrieve the noteID from the intent
         noteId = getIntent().getStringExtra("noteId");
         loadNoteDetails(noteId);
-        Toast.makeText(this, "noteID: "+noteId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "noteID: " + noteId, Toast.LENGTH_SHORT).show();
 
         noteTitle = findViewById(R.id.titleTv);
         noteDescription = findViewById(R.id.noteDescription);
@@ -61,6 +69,7 @@ public class user_notesDetails extends AppCompatActivity {
         numberOfViews = findViewById(R.id.numberOfViews);
         backBtn = findViewById(R.id.backNotesBtn);
         readBtn = findViewById(R.id.readBtn);
+        downloadBtn = findViewById(R.id.downloadBtn);
 
         //handle click, go back
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +118,12 @@ public class user_notesDetails extends AppCompatActivity {
                 });
             }
         });
+
+        //handle click, download notes
+
     }
 
+    //request storage permission
     private void loadNoteDetails(String noteId) {
         //Log.d("Note details", "Receiver noteId: "+noteId);
         DatabaseReference noteRef = FirebaseDatabase.getInstance().getReference().child("Notes").child(noteId);
