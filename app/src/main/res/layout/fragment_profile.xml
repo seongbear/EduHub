@@ -192,6 +192,7 @@
 
             <ScrollView android:id="@+id/ScrollView"
                 android:layout_width="match_parent"
+                android:contentDescription="content"
                 android:layout_height="300dp">
                 <FrameLayout
                 android:id="@+id/fragment_container"
