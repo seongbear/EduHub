@@ -9,10 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -119,8 +122,60 @@ public class user_notesDetails extends AppCompatActivity {
             }
         });
 
-        //handle click, download notes
+        // Handle click, download notes
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increment the number of downloads
+                DatabaseReference noteRef = FirebaseDatabase.getInstance().getReference().child("Notes").child(noteId);
+                noteRef.runTransaction(new Transaction.Handler() {
+                    @NonNull
+                    @Override
+                    public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                        // Retrieve current downloads
+                        Integer currentDownloads = mutableData.child("Download").getValue(Integer.class);
+                        if (currentDownloads == null) {
+                            currentDownloads = 0; // If this field is null, default to 0
+                        }
 
+                        // Increment download by 1
+                        mutableData.child("Download").setValue(currentDownloads + 1);
+
+                        // Set value back to the database
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                        if (committed) {
+                            // Downloads updated successfully
+                            downloadPdf(url);
+                            Toast.makeText(user_notesDetails.this, "Downloaded successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Downloads update failed
+                            Toast.makeText(user_notesDetails.this, "Failed to update downloads", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    //Method to download the PDF file using DownloadManager
+    private void downloadPdf(String url) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle(title); //Set the title of the download notification
+        request.setDescription("Downloading"); //Set the description of the download notification
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title+".pdf");
+
+        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        if (downloadManager != null){
+            downloadManager.enqueue(request);
+        } else{
+            Toast.makeText(this,"DownloadManager is not available",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //request storage permission
