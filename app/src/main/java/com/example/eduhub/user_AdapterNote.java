@@ -3,6 +3,7 @@ package com.example.eduhub;
 import static com.example.eduhub.Constants.MAX_BYTES_PDF;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,9 @@ public class user_AdapterNote extends RecyclerView.Adapter<user_AdapterNote.View
         loadPdfUrl(note, holder);
         loadPdfSize(note, holder);
         loadAuthor(note, holder);
+
+        //Setting the note ID as a tag to the itemView for easy retrieval in OnClick
+        holder.itemView.setTag(note.getId());
     }
 
     private void loadAuthor(user_modelPdf note, ViewHolder holder) {
@@ -169,7 +173,7 @@ public class user_AdapterNote extends RecyclerView.Adapter<user_AdapterNote.View
         return noteList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView noteTitle, noteDescription, noteCategory;
         private TextView timestamp, noteSize, noteAuthor;
         private PDFView pdfView;
@@ -182,6 +186,22 @@ public class user_AdapterNote extends RecyclerView.Adapter<user_AdapterNote.View
             noteSize = itemView.findViewById(R.id.sizeTv);
             pdfView = itemView.findViewById(R.id.pdfView);
             noteAuthor = itemView.findViewById(R.id.authorTv);
+
+            //Set click listener on the entire item view
+            itemView.setOnClickListener(this);
+        }
+
+        public void onClick(View view){
+            //Handle item click here
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION){
+                user_modelPdf clickedNote = noteList.get(position);
+
+                //Pass the note ID to other activity
+                Intent intent = new Intent(context, user_notesDetails.class);
+                intent.putExtra("noteId", clickedNote.getId());
+                context.startActivity(intent);
+            }
         }
     }
 }

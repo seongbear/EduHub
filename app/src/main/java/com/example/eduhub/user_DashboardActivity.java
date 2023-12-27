@@ -60,28 +60,28 @@ public class user_DashboardActivity extends AppCompatActivity {
         uploadDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //Setting dialog
-        settingDialog = new Dialog(this);
-        settingDialog.setContentView(R.layout.dialog_settings);
-        settingBtn = binding.toolbar.findViewById(R.id.setting);
-        settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                settingDialog.setContentView(R.layout.dialog_settings);
-                settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                Button privacy = settingDialog.findViewById(R.id.privacyBtn);
-                Button editProfile = settingDialog.findViewById(R.id.editProfileBtn);
-                Button logOut = settingDialog.findViewById(R.id.logoutBtn);
-
-                logOut.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        firebaseAuth.signOut();
-                        checkUser();
-                    }
-                });
-            }
-        });
+//        settingDialog = new Dialog(this);
+//        settingDialog.setContentView(R.layout.dialog_settings);
+//        settingBtn = binding.toolbar.findViewById(R.id.setting);
+//        settingBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                settingDialog.setContentView(R.layout.dialog_settings);
+//                settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//                Button privacy = settingDialog.findViewById(R.id.privacyBtn);
+//                Button editProfile = settingDialog.findViewById(R.id.editProfileBtn);
+//                Button logOut = settingDialog.findViewById(R.id.logoutBtn);
+//
+//                logOut.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        firebaseAuth.signOut();
+//                        checkUser();
+//                    }
+//                });
+//            }
+//        });
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
