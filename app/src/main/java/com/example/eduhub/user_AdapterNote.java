@@ -165,7 +165,6 @@ public class user_AdapterNote extends RecyclerView.Adapter<user_AdapterNote.View
                         Log.d(TAG, "onFailure: failed getting file from url due to "+e.getMessage());
                     }
                 });
-
     }
 
     @Override
