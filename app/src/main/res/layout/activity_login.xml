@@ -21,17 +21,16 @@
             android:layout_height="56dp"
             android:background="@android:color/transparent"
             android:src="@drawable/baseline_keyboard_backspace_24"
-            android:contentDescription="BackButton"/>
+            android:contentDescription="@string/back"/>
 
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            android:text="Login"
+            android:text="@string/login"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -51,8 +50,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Input Your Credentials"
-            android:textSize="25dp"
+            android:text="@string/input_your_credentials"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <RelativeLayout
@@ -82,10 +81,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_edittext01"
                     android:drawableStart="@drawable/baseline_mail_24"
-                    android:hint="Email"
+                    android:drawablePadding="@dimen/activity_horizontal_margin"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/dark_grey" />
+                    android:textColorHint="@color/dark_grey"
+                    android:autofillHints="Email" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,10 +106,12 @@
                     android:id="@+id/passwordEt"
                     android:background="@drawable/shape_edittext01"
                     android:drawableStart="@drawable/baseline_lock_24"
-                    android:hint="Password"
+                    android:drawablePadding="@dimen/activity_horizontal_margin"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textColorHint="@color/dark_grey"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:autofillHints="Password" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--Forgot Password-->
@@ -119,9 +122,9 @@
                 android:layout_below="@id/passwordTil"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Forgot Password"
+                android:text="@string/forgot_password"
                 android:textColor="@color/dark_grey"/>
 
             <Button
@@ -131,7 +134,7 @@
                 android:layout_below="@id/forgotTv"
                 android:layout_marginTop="68dp"
                 android:background="@drawable/shape_button01"
-                android:text="Login"
+                android:text="@string/login"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
@@ -142,9 +145,9 @@
                 android:layout_below="@id/loginBtn"
                 android:layout_marginTop="20sp"
                 android:background="@drawable/shape_button03"
-                android:text="Create an Account Instead"
+                android:text="@string/create_an_account_instead"
                 android:textColor="@color/dark_grey"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </RelativeLayout>
 

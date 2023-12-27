@@ -1,7 +1,9 @@
 package com.example.eduhub;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     //firebase auth
@@ -37,8 +40,11 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkUser() {
-        //get current user, if logged in
+        // get current user, if logged in
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        // Temporary set user to null
+//         firebaseUser = null;
+        startActivity(new Intent(SplashActivity.this, user_DashboardActivity.class));
         if (firebaseUser == null){
             //user not logged in
             //start main screen
@@ -51,9 +57,9 @@ public class SplashActivity extends AppCompatActivity {
             ref.child(firebaseUser.getUid())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot snapshot) {
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                             //get user type
-                            String userType = ""+snapshot.child("userType").getValue();
+                            String userType = String.format("%s", snapshot.child("userType").getValue());
                             //check user type
                             if (userType.equals("user")){
                                 //this is simple view, open user dashboard
@@ -67,7 +73,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError error) {
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });

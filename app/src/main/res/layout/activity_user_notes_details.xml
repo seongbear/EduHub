@@ -387,7 +387,7 @@
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="50dp"
-            android:src="@drawable/__icon__download_"
+            android:src="@drawable/baseline_download_24"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/rectangle_3" />
