@@ -19,10 +19,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import com.example.eduhub.databinding.ActivityUserNotesDetailsBinding;
+import com.example.eduhub.databinding.ActivityUserUploadNotesBinding;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
@@ -42,14 +46,14 @@ import com.google.firebase.storage.StorageReference;
 public class user_notesDetails extends AppCompatActivity {
     private static final String TAG_DOWNLOAD = "DOWNLOAD_TAG";
     private static final int SAF_REQUEST_CODE = 0;
-    private String title, description, authorName, dateUploaded, categoryName, size, authorID, url, noteId;
-    private int views, downloads;
+    private String title, description, authorName, dateUploaded, categoryName, authorID, url, noteId;
     private long timestamp;
-    TextView noteTitle, noteDescription, noteCategory, noteDate, author,sizeTv, numberOfViews, numberOfDownloads;
+    TextView noteTitle, noteDescription, noteCategory, noteDate, author,sizeTv, numberOfViews, numberOfDownloads, numberOfLikes;
     PDFView noteImg;
     ImageButton backBtn, downloadBtn;
+    ToggleButton likeBtn;
     Button readBtn;
-    ActivityResultLauncher<String> requestPermissionLauncher;
+    private DatabaseReference likeRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class user_notesDetails extends AppCompatActivity {
         backBtn = findViewById(R.id.backNotesBtn);
         readBtn = findViewById(R.id.readBtn);
         downloadBtn = findViewById(R.id.downloadBtn);
+        likeBtn = findViewById(R.id.LikeBtn);
+        numberOfLikes = findViewById(R.id.numberOfLikesTv);
 
         //handle click, go back
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +128,7 @@ public class user_notesDetails extends AppCompatActivity {
             }
         });
 
-        // Handle click, download notes
+        //handle click, download notes
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +166,13 @@ public class user_notesDetails extends AppCompatActivity {
             }
         });
 
+        //handle toggle, like or unlike notes
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     //Method to download the PDF file using DownloadManager
@@ -202,17 +215,20 @@ public class user_notesDetails extends AppCompatActivity {
                     loadPdfUrl(url);
 
                     //Increment the number of views
-                    //number of views and downloads
+                    //number of views, downloads, likes
                     Integer views = snapshot.child("Views").getValue(Integer.class);
                     Integer downloads = snapshot.child("Download").getValue(Integer.class);
+                    Integer likes = snapshot.child("Likes").getValue(Integer.class);
 
                     // Convert integer values to strings with null checks
                     String viewsString = views != null ? String.valueOf(views) : "0";
                     String downloadsString = downloads != null ? String.valueOf(downloads) : "0";
+                    String likesString = likes != null ? String.valueOf(likes) : "0";
 
                     // Set the values to TextViews
                     numberOfDownloads.setText(downloadsString);
                     numberOfViews.setText(viewsString);
+                    numberOfLikes.setText(likesString+" likes");
 
                     //Set the title after data is loaded
                     noteTitle.setText(title);

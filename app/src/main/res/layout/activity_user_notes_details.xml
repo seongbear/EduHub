@@ -438,6 +438,7 @@
                     android:textOn="" />
 
                 <TextView
+                    android:id="@+id/numberOfLikesTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
